@@ -6,6 +6,7 @@ export default function Home() {
   const [invertedBackground, setInvertedBackground] = useState(false);
   const [background, setBackground] = useState({ container: color1, innerContainer: color2 });
   const [isHover, setIsHover] = useState(false);
+  const [{ startColor1, startColor2 }, setStartColor] = useState({ startColor1: true, startColor2: true });
   const [dynamicColor, setDynamicColor] = useState(
     isHover ? { color: color1, outlineColor: color1 } : { color: color1 }
   );
@@ -39,8 +40,9 @@ export default function Home() {
             type="color"
             id="userColor"
             name="userColor"
-            value={color1}
+            value={startColor1 ? "#000000" : color1}
             onChange={(event) => {
+              setStartColor({ startColor1: false, startColor2 });
               setColors({ color1: event.target.value, color2 });
             }}
           />
@@ -50,8 +52,9 @@ export default function Home() {
             type="color"
             id="userColor2"
             name="userColor2"
-            value={color2}
+            value={startColor2 ? "#00ffff" : color2}
             onChange={(event) => {
+              setStartColor({ startColor1, startColor2: false });
               setColors({ color1, color2: event.target.value });
             }}
           />
